@@ -78,14 +78,14 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
-
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Profile.this, UpdateProfile.class);
                 startActivity(i);
             }
+
+
         });
 
 

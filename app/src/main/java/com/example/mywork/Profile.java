@@ -18,6 +18,7 @@ import com.example.mywork.R;
 import com.example.mywork.UpdateProfile;
 import com.example.mywork.UserProfile;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +43,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
         profileName =(TextView)findViewById(R.id.Name) ;
         profileEmail = (TextView)findViewById(R.id.Email) ;
         profilePhone = (TextView)findViewById(R.id.Phone) ;
@@ -49,15 +52,15 @@ public class Profile extends AppCompatActivity {
 
 
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseApp.initializeApp(this) ;
         databaseref = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String id = user.getUid();//easy to refer
+       // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+       // String id = user.getUid();//easy to refer
 
 
 
 
-        databaseref.child("Customers").child(id).addValueEventListener(new ValueEventListener() {
+        databaseref.child("Customers").child("591ZDiaEyfUWM73I8EP7UoxqwSd2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String fname = dataSnapshot.child("Name").getValue().toString();
@@ -74,7 +77,8 @@ public class Profile extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Profile.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Profile.this, "please make sure you are connected to firebase ", Toast.LENGTH_LONG).show();
+
             }
         });
 

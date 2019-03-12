@@ -63,7 +63,7 @@ public class Profile extends AppCompatActivity {
         databaseref.child("Customers").child("591ZDiaEyfUWM73I8EP7UoxqwSd2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String fname = dataSnapshot.child("Name").getValue().toString();
+                String fname = dataSnapshot.child("name").getValue().toString();
                 String cemail = dataSnapshot.child("email").getValue().toString();
                 String cphone = dataSnapshot.child("phone").getValue().toString();
 

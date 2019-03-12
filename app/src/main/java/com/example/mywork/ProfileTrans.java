@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,6 +27,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class ProfileTrans extends AppCompatActivity {
 
@@ -52,21 +56,23 @@ public class ProfileTrans extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseref = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String id = user.getUid();//easy to refer
+       // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+       // String id = user.getUid();//easy to refer
 
 
-        databaseref.child("Translators").child(id).addValueEventListener(new ValueEventListener() {
+        databaseref.child("Translators").child("LWq_l8qkNYWxdy3htBT").addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String tname = dataSnapshot.child("Name").getValue().toString();
-                String temail = dataSnapshot.child("email").getValue().toString();
-                String tphone = dataSnapshot.child("phone").getValue().toString();
+
                 String tbio = dataSnapshot.child("bio").getValue().toString();
-                String edu = dataSnapshot.child("education").getValue().toString();
-                String field = dataSnapshot.child("field").getValue().toString();
-                String language = dataSnapshot.child("language").getValue().toString();
-                String prolang = dataSnapshot.child("providedLanguage").getValue().toString();
+                String tname = Objects.requireNonNull(dataSnapshot.child("name").getValue().toString());
+                String temail = Objects.requireNonNull(dataSnapshot.child("email").getValue().toString());
+                String tphone = Objects.requireNonNull(dataSnapshot.child("phone").getValue().toString());
+                String edu = Objects.requireNonNull(dataSnapshot.child("education").getValue().toString());
+                String field = Objects.requireNonNull(dataSnapshot.child("field").getValue().toString());
+                String language = Objects.requireNonNull(dataSnapshot.child("language").getValue().toString());
+                String prolang = Objects.requireNonNull(dataSnapshot.child("providedLanguage").getValue()).toString();
 
 
                 profileNamet.setText(tname);

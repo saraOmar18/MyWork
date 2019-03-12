@@ -53,7 +53,7 @@ public class Profile extends AppCompatActivity {
 
 
         FirebaseApp.initializeApp(this) ;
-        databaseref = FirebaseDatabase.getInstance().getReference("Customers");
+        databaseref = FirebaseDatabase.getInstance().getReference();
        // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
        // String id = user.getUid();//easy to refer
 
